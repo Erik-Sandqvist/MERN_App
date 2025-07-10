@@ -9,14 +9,14 @@ dotenv.config();
 console.log(process.env.MONGO_URI);
 
 const app = express();
+const port = process.env.PORT || 5001;
 
 connectDB();
 
 app.use("/api/notes", notesRoutes); 
 
 
-app.listen(5001, () => {
-  console.log('Server is running on http://localhost:5001');
-  process.exit(1); 
+app.listen(port, () => {
+  console.log("Server is running on:", port); 
 });
 
