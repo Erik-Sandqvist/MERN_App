@@ -48,6 +48,7 @@ export async function updateNote(req, res) {
     }
 }
 
+
 export async function deleteNote(req, res) {
     const noteId = req.params.id;
     res.status(200).json({ message: `Note with ID ${noteId} deleted successfully` });
