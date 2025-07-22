@@ -1,8 +1,8 @@
 import Note from '../models/Note.js';
 
-export async function getAllNotes(req, res) {
+export async function getAllNotes(_, res) {
    try {
-        const notes = await Note.find()
+        const notes = await Note.find().sort({ createdAt: -1 });
         res.status(200).json(notes);
     }
     catch (error) {
@@ -11,8 +11,16 @@ export async function getAllNotes(req, res) {
 }
 
 export async function getNoteById(req, res) {
-    const noteId = req.params.id;
-    res.status(200).json({ message: `Note with ID ${noteId} retrieved successfully` });
+    try {
+        const note = await Note.findById(req.params.id);
+        if (!note) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        res.status(200).json(note);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error retrieving note", error: error.message });
+    }
 }
 
 export async function createNote(req, res) {    
@@ -50,6 +58,14 @@ export async function updateNote(req, res) {
 
 
 export async function deleteNote(req, res) {
-    const noteId = req.params.id;
-    res.status(200).json({ message: `Note with ID ${noteId} deleted successfully` });
+    try {
+        const deletedNote = await Note.findByIdAndDelete(req.params.id);
+        if (!deletedNote) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        res.status(200).json({ message: "Note deleted successfully" });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error deleting note", error: error.message });
+    }
 }
