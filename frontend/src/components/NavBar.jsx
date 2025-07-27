@@ -1,3 +1,7 @@
+import { PlusIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+
+
 const NavVBar = () => {
     return <header className="bg-base-300 border-b border-base-content/10">
 
@@ -5,7 +9,10 @@ const NavVBar = () => {
     <div className="flex itemes-center justify-between">
 <h1 className="text-3xl font-bold text-primary font-mono tracking-tight">ThinkBoard </h1>
 <div className="flex items-center gap-4">
-
+<Link to={"/create"} className="btn btn-primary">
+<PlusIcon className="size-5"/>
+<span>Create Note</span>
+</Link>
 </div>
     </div>
 </div>
