@@ -53,7 +53,7 @@ const HomePage = () => {
 </div>
 
 {!loading && notes.length === 0 && (
-  <div className="text-center text-base-content py-10">No notes available. Create your first note!</div>
+  <div className="text-center text-base-content py-10">No notes available.</div>
 )}
 </div>
 
