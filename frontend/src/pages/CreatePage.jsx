@@ -1,14 +1,38 @@
+import axios from "axios";
 import { ArrowLeftIcon } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router";
 
 const CreatePage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    // Hantering av formulärsubmit logik läggs här
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!title || !content) {
+      toast.error("Title and content are required.");
+      return;
+    }
+    setLoading(true);
+    try{
+      await axios.post("http://localhost:5001/api/notes", {
+        title,
+        content,
+      });
+      toast.success("Note created successfully!");
+      navigate("/")
+    }
+    catch {
+      console.error("Error creating note:", error);
+     toast.error("Failed to create note. Please try again later.");
+    }
+    finally{
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,7 +70,7 @@ const CreatePage = () => {
          placeholder="Write your note content here..."
           className="textarea textarea-bordered h-32"
           value={content}
-          onChange={(e) => setTitle(e.target.value)}   
+          onChange={(e) => setContent(e.target.value)}   
         />
       </div>
       <div className="card-actions justify-end">
