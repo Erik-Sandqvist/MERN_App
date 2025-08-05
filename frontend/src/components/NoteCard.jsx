@@ -29,8 +29,12 @@ const NoteCard = ({note, setNotes}) => {
   <p className="text-base-content/70 line-clamp-3">{note.content}</p>
   
   <div className="card-actions justify-between items-center mt-4">
-  <span className="text-sm text-base-content/60">{formatDate(new Date(note.createdAt))} 
-  </span>
+  <span className="text-sm text-base-content/60">
+  {note.createdAt
+    ? formatDate(Number(note.createdAt)) // Konvertera till nummer innan du skickar
+    : "No Date"}
+</span>
+
     
     <div className="flex items-center gap-1">
       <PenSquareIcon className="size-4" />

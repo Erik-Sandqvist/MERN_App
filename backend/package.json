@@ -2,6 +2,8 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "src/server.js",
+  "type": "module",
+  "description": "",
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
@@ -9,7 +11,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.35.1",
@@ -21,6 +25,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
-  },
-  "type": "module"
+  }
 }
