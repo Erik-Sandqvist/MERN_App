@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: mern-backend
+    env: node
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: npm run start --prefix backend
+    nodeVersion: 18
+    plan: free
+    autoDeploy: true
